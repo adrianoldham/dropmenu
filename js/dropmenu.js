@@ -28,7 +28,16 @@ DropMenu.Item = Class.create({
         
         this.uniqueId = parseInt(Math.random() * 10000000);
         this.element = $(element);
-        this.dropdown = this.element.getElementsBySelector('.' + this.options.dropdownClass)[0];
+        
+        var dropdown = this.element.getElementsBySelector('.' + this.options.dropdownClass)[0];
+        this.dropdown = new Element("div");
+        dropdown.insert({ after: this.dropdown });
+        this.dropdown.insert(dropdown);
+        
+        // Apply drop down class to new wrapper div
+        this.dropdown.classNames().add(this.options.dropdownClass);
+        dropdown.classNames().remove(this.options.dropdownClass);
+        
         this.effects = [];
         
         if (this.hasDropDown()) this.dropdown.hide();
