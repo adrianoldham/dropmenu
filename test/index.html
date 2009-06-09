@@ -69,13 +69,11 @@
 			<ul class="dropdown">
 				<li class="sub-menu-item">
 					Item 1.1
-					<div class="dropdown">
-						<ul>
-							<li class="ter-menu-item">Item 1.1.1</li>
-							<li class="ter-menu-item">Item 1.1.2</li>
-							<li class="ter-menu-item">Item 1.1.3</li>
-						</ul>
-					</div>
+					<ul class="dropdown">
+						<li class="ter-menu-item">Item 1.1.1</li>
+						<li class="ter-menu-item">Item 1.1.2</li>
+						<li class="ter-menu-item">Item 1.1.3</li>
+                    </ul>
 				</li>
 				<li class="sub-menu-item">Item 1.2</li>
 				<li class="sub-menu-item">Item 1.3</li>
@@ -111,8 +109,8 @@
     function runTest() {
         var menu = new DropMenu('.menu-item, .sub-menu-item, .ter-menu-item',{
 	        effects: {
-	            show: [ Effect.SlideDown, Effect.Appear ],      // Can use a combination of effects to
-	            hide: [ Effect.SlideUp, Effect.Fade ],          // show or hide the dropdowns
+	            show: [ Effect.BlindDown, Effect.Appear ],      // Can use a combination of effects to
+	            hide: [ Effect.BlindUp, Effect.Fade ],          // show or hide the dropdowns
 	            showDuration: 1.0,
 	            hideDuration: 0.2,
 	            transition: Effect.Transitions.spring           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
