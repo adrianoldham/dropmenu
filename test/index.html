@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>Drop Menu - Test 1</title>
+    <script type="text/javascript" charset="utf-8" src="../lib/prototype.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../lib/scriptaculous.js?load=effects"></script>
+    <script type="text/javascript" charset="utf-8" src="../js/dropmenu.js"></script>
+</head>
+
+<body>
+	<style type="text/css" media="screen">
+		* {
+			padding: 0;
+			margin: 0;
+		}		
+		
+		body {
+			height: 1000px;
+		}
+
+		.navigation .menu-item,
+		.navigation .sub-menu-item,
+		.navigation .ter-menu-item {
+			list-style-type: none;
+			color: #000;
+			cursor: pointer;
+			position: relative;
+		}
+		
+		.navigation .menu-item {
+			float: left;
+			margin: 5px;
+		}
+				
+		.dropdown .sub-menu-item, .dropdown .ter-menu-item {
+			padding: 5px;
+		}
+		
+		.navigation .hover, .dropdown .hover {
+			color: #666;
+		}
+		
+		.navigation .dropdown {
+			position: absolute;
+			background-color: #eee;
+			border: 2px solid black;
+		}
+		
+		.navigation .menu-item .dropdown {
+			left: 0;
+			top: 15px;
+			width: 100px;
+		}
+		
+		.navigation .sub-menu-item .dropdown {
+			right: -200px;
+			left: auto;
+			width: 200px;
+			top: -2px;
+		}
+	</style>
+	<ul class="navigation">
+		<li class="menu-item">
+			Item 1
+			<div class="dropdown">
+				<ul>
+					<li class="sub-menu-item">
+						Item 1.1
+						<div class="dropdown">
+							<ul>
+								<li class="ter-menu-item">Item 1.1.1</li>
+								<li class="ter-menu-item">Item 1.1.2</li>
+								<li class="ter-menu-item">Item 1.1.3</li>
+							</ul>
+						</div>
+					</li>
+					<li class="sub-menu-item">Item 1.2</li>
+					<li class="sub-menu-item">Item 1.3</li>
+					<li class="sub-menu-item">Item 1.4</li>
+				</ul>
+			</div>
+		</li>
+		<li class="menu-item">
+			Item 2
+			<div class="dropdown">
+				<ul>
+					<li class="sub-menu-item">Item 2.1</li>
+					<li class="sub-menu-item">Item 2.2</li>
+					<li class="sub-menu-item">Item 2.3</li>
+					<li class="sub-menu-item">Item 2.4</li>
+				</ul>
+			</div>
+		</li>
+		<li class="menu-item">
+			Item 3
+			<div class="dropdown">
+				<ul>
+					<li class="sub-menu-item">Item 3.1</li>
+					<li class="sub-menu-item">Item 3.2</li>
+					<li class="sub-menu-item">Item 3.3</li>
+					<li class="sub-menu-item">Item 3.4</li>
+					<li class="sub-menu-item">Item 3.5</li>
+					<li class="sub-menu-item">Item 3.6</li>
+					<li class="sub-menu-item">Item 3.7</li>
+					<li class="sub-menu-item">Item 3.8</li>
+				</ul>
+			</div>
+		</li>
+	</ul>
+</body>
+
+<script type="text/javascript" charset="utf-8">
+    function runTest() {
+        var menu = new DropMenu('.menu-item, .sub-menu-item, .ter-menu-item',{
+	        effects: {
+	            show: [ Effect.SlideDown, Effect.Appear ],      // Can use a combination of effects to
+	            hide: [ Effect.SlideUp, Effect.Fade ],          // show or hide the dropdowns
+	            showDuration: 1.0,
+	            hideDuration: 0.2,
+	            transition: Effect.Transitions.spring           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
+	        }
+		});
+    }
+
+    Event.observe(window, "load", runTest);
+</script>
+
+</html>
