@@ -36,27 +36,27 @@
 			margin: 5px;
 		}
 				
-		.dropdown .sub-menu-item, .dropdown .ter-menu-item {
+		ul .sub-menu-item, ul .ter-menu-item {
 			padding: 5px;
 		}
 		
-		.navigation .hover, .dropdown .hover {
+		.navigation .hover, ul .hover {
 			color: #666;
 		}
 		
-		.navigation .dropdown {
+		.navigation div {
 			position: absolute;
 			background-color: #eee;
 			border: 2px solid black;
 		}
 		
-		.navigation .menu-item .dropdown {
+		.navigation .menu-item div {
 			left: 0;
 			top: 15px;
 			width: 100px;
 		}
 		
-		.navigation .sub-menu-item .dropdown {
+		.navigation .sub-menu-item div {
 			right: -200px;
 			left: auto;
 			width: 200px;
@@ -69,11 +69,19 @@
 			<ul class="dropdown">
 				<li class="sub-menu-item">
 					Item 1.1
+<<<<<<< .mine
+					<ul>
+						<li class="ter-menu-item">Item 1.1.1</li>
+						<li class="ter-menu-item">Item 1.1.2</li>
+						<li class="ter-menu-item">Item 1.1.3</li>
+					</ul>
+=======
 					<ul class="dropdown">
 						<li class="ter-menu-item">Item 1.1.1</li>
 						<li class="ter-menu-item">Item 1.1.2</li>
 						<li class="ter-menu-item">Item 1.1.3</li>
                     </ul>
+>>>>>>> .r4
 				</li>
 				<li class="sub-menu-item">Item 1.2</li>
 				<li class="sub-menu-item">Item 1.3</li>
@@ -82,7 +90,7 @@
 		</li>
 		<li class="menu-item">
 			Item 2
-			<ul class="dropdown">
+			<ul>
 				<li class="sub-menu-item">Item 2.1</li>
 				<li class="sub-menu-item">Item 2.2</li>
 				<li class="sub-menu-item">Item 2.3</li>
@@ -91,7 +99,7 @@
 		</li>
 		<li class="menu-item">
 			Item 3
-			<ul class="dropdown">
+			<ul>
 				<li class="sub-menu-item">Item 3.1</li>
 				<li class="sub-menu-item">Item 3.2</li>
 				<li class="sub-menu-item">Item 3.3</li>
