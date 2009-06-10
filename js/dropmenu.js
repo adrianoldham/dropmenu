@@ -1,7 +1,7 @@
 var DropMenu = Class.create({
     options: {
         hoverClass: "hover",                                // The class applied to a menu when it's hovered over
-        dropdownClass: "dropdown",                          // The class of the dropdowns to look for
+        dropdownElement: "ul",                              // The element type of the dropdowns to look for
         effects: {
             show: [ Effect.Appear ],                        // Can use a combination of effects to
             hide: [ Effect.Fade ],                          // show or hide the dropdowns
@@ -29,14 +29,17 @@ DropMenu.Item = Class.create({
         this.uniqueId = parseInt(Math.random() * 10000000);
         this.element = $(element);
         
-        var dropdown = this.element.getElementsBySelector('.' + this.options.dropdownClass)[0];
-        this.dropdown = new Element("div");
-        dropdown.insert({ after: this.dropdown });
-        this.dropdown.insert(dropdown);
+        var dropdown = this.element.getElementsBySelector(this.options.dropdownElement)[0];
         
+        if (dropdown) {
+            this.dropdown = new Element("div");
+            dropdown.insert({ after: this.dropdown });
+            this.dropdown.insert(dropdown);
+        }
+                
         // Apply drop down class to new wrapper div
-        this.dropdown.classNames().add(this.options.dropdownClass);
-        dropdown.classNames().remove(this.options.dropdownClass);
+        //this.dropdown.classNames().add(this.options.dropdownClass);
+        //dropdown.classNames().remove(this.options.dropdownClass);
         
         this.effects = [];
         
