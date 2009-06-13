@@ -32,21 +32,39 @@ DropMenu.Item = Class.create({
         var dropdown = this.element.getElementsBySelector(this.options.dropdownElement)[0];
         
         if (dropdown) {
-            this.dropdown = new Element("div");
-            dropdown.insert({ after: this.dropdown });
-            this.dropdown.insert(dropdown);
+            if (this.options.effects.show.indexOf(Effect.SlideUp)   != -1 ||
+                this.options.effects.show.indexOf(Effect.SlideDown) != -1 ||
+                this.options.effects.hide.indexOf(Effect.SlideUp)   != -1 ||
+                this.options.effects.hide.indexOf(Effect.SlideDown) != -1) {
+                this.dropdown = new Element("div");
+                dropdown.insert({ after: this.dropdown });
+                this.dropdown.insert(dropdown);   
+            } else {
+                this.dropdown = dropdown;
+            }
+
+            this.hideLeft = this.dropdown.getStyle('left');
+            this.hideDisplay = this.dropdown.getStyle('display');
         }
-                
-        // Apply drop down class to new wrapper div
-        //this.dropdown.classNames().add(this.options.dropdownClass);
-        //dropdown.classNames().remove(this.options.dropdownClass);
         
         this.effects = [];
         
-        if (this.hasDropDown()) this.dropdown.hide();
+        this.accessibilityHide();
         
         this.element.observe("mouseover", this.mouseEnter.bind(this)(this.show.bindAsEventListener(this)));
         this.element.observe("mouseout", this.mouseEnter.bind(this)(this.hide.bindAsEventListener(this)));
+    },
+    
+    accessibilityShow: function() {
+        if (this.hasDropDown()) {
+            this.dropdown.setStyle({ left: '0', display: 'block' });  
+        }
+    },
+    
+    accessibilityHide: function() {
+        if (this.hasDropDown()) {
+            this.dropdown.setStyle({ left: this.hideLeft, display: this.hideDisplay });   
+        }
     },
     
     mouseEnter: function(handler) {
@@ -86,7 +104,10 @@ DropMenu.Item = Class.create({
             this.currentEffect = new Effect.Parallel(effects, {
                 duration: this.options.effects.showDuration,
                 transition: this.options.effects.transition,
-                queue: { position: 'end', scope: 'dropmenu-show' }  
+                queue: { position: 'end', scope: 'dropmenu-show' },
+                afterSetup: function() {
+                    this.accessibilityShow();
+                }.bind(this)
             });
         }
     },
@@ -105,7 +126,10 @@ DropMenu.Item = Class.create({
             
             this.currentEffect = new Effect.Parallel(effects, {
                 duration: this.options.effects.hideDuration,
-                queue: { position: 'end', scope: 'dropmenu-hide' }  
+                queue: { position: 'end', scope: 'dropmenu-hide' },
+                afterFinish: function() {
+                    this.accessibilityHide();
+                }.bind(this)
             });
         }
     }

@@ -44,23 +44,33 @@
 			color: #666;
 		}
 		
-		.navigation div {
+		.navigation ul {
 			position: absolute;
 			background-color: #eee;
 			border: 2px solid black;
 		}
 		
-		.navigation .menu-item div {
-			left: 0;
+		.navigation .menu-item ul {
 			top: 15px;
 			width: 100px;
 		}
 		
-		.navigation .sub-menu-item div {
-			right: -200px;
-			left: auto;
+		.navigation .sub-menu-item ul {
 			width: 200px;
+			margin-left: 100px;
 			top: -2px;
+		}
+		
+		.menu-item ul {
+			left: -99999px;
+		}
+		
+		.menu-item:hover > ul {
+			left: 0;
+		}
+		
+		.sub-menu-item:hover > ul {
+			left: 0;
 		}
 	</style>
 	<ul class="navigation">
