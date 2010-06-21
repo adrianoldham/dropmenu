@@ -2,6 +2,7 @@ var DropMenu = Class.create({
     options: {
         hoverClass: "hover",                                // The class applied to a menu when it's hovered over
         dropdownElement: "ul",                              // The element type of the dropdowns to look for
+        showLeft: 0,                                        // Set null to use parent element width, non-zero values require units ie: "200px" or "20em"
         effects: {
             show: [ Effect.Appear ],                        // Can use a combination of effects to
             hide: [ Effect.Fade ],                          // show or hide the dropdowns
@@ -45,6 +46,12 @@ DropMenu.Item = Class.create({
 
             this.hideLeft = this.dropdown.getStyle('left');
             this.hideDisplay = this.dropdown.getStyle('display');
+
+            if (this.options.showLeft == null) {
+                this.showLeft = this.dropdown.getStyle('width');
+            } else {
+                this.showLeft = this.options.showLeft;
+            }
         }
         
         this.effects = [];
@@ -57,7 +64,7 @@ DropMenu.Item = Class.create({
     
     accessibilityShow: function() {
         if (this.hasDropDown()) {
-            this.dropdown.setStyle({ left: '0', display: 'block' });  
+            this.dropdown.setStyle({ left: this.showLeft, display: 'block' });  
         }
     },
     
