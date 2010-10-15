@@ -64,13 +64,13 @@ DropMenu.Item = Class.create({
     
     accessibilityShow: function() {
         if (this.hasDropDown()) {
-            this.dropdown.setStyle({ left: this.showLeft, display: 'block' });  
+            this.dropdown.setStyle({ left: this.showLeft, display: 'block', opacity: 1 });
         }
     },
     
     accessibilityHide: function() {
         if (this.hasDropDown()) {
-            this.dropdown.setStyle({ left: this.hideLeft, display: this.hideDisplay });   
+            this.dropdown.setStyle({ left: this.hideLeft, display: this.hideDisplay, opacity: 0 });
         }
     },
     
