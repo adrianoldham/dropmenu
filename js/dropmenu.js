@@ -97,7 +97,7 @@ DropMenu.Item = Class.create({
     },
     
     show: function(event) {
-        this.element.classNames().add(this.options.hoverClass);
+        this.element.addClassName(this.options.hoverClass);
         
         if (this.hasDropDown()) {
             this.clearEffect();
@@ -120,7 +120,7 @@ DropMenu.Item = Class.create({
     },
     
     hide: function(event) {
-        this.element.classNames().remove(this.options.hoverClass);
+        this.element.removeClassName(this.options.hoverClass);
         
         if (this.hasDropDown()) {
             this.clearEffect();
