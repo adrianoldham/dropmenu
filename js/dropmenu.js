@@ -6,6 +6,8 @@ var DropMenu = Class.create({
         effects: {
             show: [ Effect.Appear ],                        // Can use a combination of effects to
             hide: [ Effect.Fade ],                          // show or hide the dropdowns
+            showDelay: 0,
+            hideDelay: 0,
             showDuration: 0.2,
             hideDuration: 0.2,
             transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
@@ -109,6 +111,7 @@ DropMenu.Item = Class.create({
             }.bind(this));
             
             this.currentEffect = new Effect.Parallel(effects, {
+                delay: this.options.effects.showDelay,
                 duration: this.options.effects.showDuration,
                 transition: this.options.effects.transition,
                 queue: { position: 'end', scope: 'dropmenu-show' },
@@ -132,6 +135,7 @@ DropMenu.Item = Class.create({
             }.bind(this));
             
             this.currentEffect = new Effect.Parallel(effects, {
+                delay: this.options.effects.hideDelay,
                 duration: this.options.effects.hideDuration,
                 queue: { position: 'end', scope: 'dropmenu-hide' },
                 afterFinish: function() {
