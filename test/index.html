@@ -121,9 +121,11 @@
 	        effects: {
 	            show: [ Effect.BlindDown, Effect.Appear ],      // Can use a combination of effects to
 	            hide: [ Effect.BlindUp, Effect.Fade ],          // show or hide the dropdowns
-	            showDuration: 1.0,
+	            showDuration: 0.1,
 	            hideDuration: 0.2,
-	            transition: Effect.Transitions.spring           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
+	            showDelay: 0,
+	            hideDelay: 0.2,
+	            transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
 	        }
 		});
     }
