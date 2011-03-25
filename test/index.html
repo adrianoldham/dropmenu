@@ -1,200 +1,200 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
-	<title>Drop Menu - Test 1</title>
+    <title>Drop Menu - Test 1</title>
     <script type="text/javascript" charset="utf-8" src="../lib/prototype.js"></script>
     <script type="text/javascript" charset="utf-8" src="../lib/scriptaculous.js?load=effects"></script>
     <script type="text/javascript" charset="utf-8" src="../js/dropmenu.js"></script>
 </head>
 
 <body>
-	<style type="text/css" media="screen">
-		* {
-			padding: 0;
-			margin: 0;
-		}		
-		
-		body {
-			height: 1000px;
-		}
+    <style type="text/css" media="screen">
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-		.navigation .menu-item,
-		.navigation .sub-menu-item,
-		.navigation .ter-menu-item {
-			list-style-type: none;
-			color: #000;
-			cursor: pointer;
-			position: relative;
-		}
-		
-		.navigation .menu-item {
-			float: left;
-			margin: 5px;
-		}
-				
-		ul .sub-menu-item, ul .ter-menu-item {
-			padding: 5px;
-		}
-		
-		.navigation .hover, ul .hover {
-			color: #666;
-		}
-		
-		.navigation ul {
-			position: absolute;
-			background-color: #eee;
-			border: 1px solid black;
-		}
-		
-		.navigation .menu-item ul {
-			top: 15px;
-			width: 200px;
-		}
-		
-		.navigation .sub-menu-item ul {
-			width: 200px;
-			margin-left: 200px;
-			top: -1px;
-		}
-		
-		.menu-item ul {
-			left: -99999px;
-		}
-		
-		.menu-item:hover > ul {
-			left: 0;
-		}
-		
-		.sub-menu-item:hover > ul {
-			left: 0;
-		}
-	</style>
-	<ul class="navigation">
-		<li class="menu-item">
-			Item 1
-			<ul class="dropdown">
-				<li class="sub-menu-item">
-					Item 1.1
-					<ul>
-						<li class="ter-menu-item">
-						    Item 1.1.1
-						    <ul>
+        body {
+            height: 1000px;
+        }
+
+        .navigation .menu-item,
+        .navigation .sub-menu-item,
+        .navigation .ter-menu-item {
+            list-style-type: none;
+            color: #000;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .navigation .menu-item {
+            float: left;
+            margin: 5px;
+        }
+
+        ul .sub-menu-item, ul .ter-menu-item {
+            padding: 5px;
+        }
+
+        .navigation .hover, ul .hover {
+            color: #666;
+        }
+
+        .navigation ul {
+            position: absolute;
+            background-color: #eee;
+            border: 1px solid black;
+        }
+
+        .navigation .menu-item ul {
+            top: 15px;
+            width: 200px;
+        }
+
+        .navigation .sub-menu-item ul {
+            width: 200px;
+            margin-left: 200px;
+            top: -1px;
+        }
+
+        .menu-item ul {
+            left: -99999px;
+        }
+
+        .menu-item:hover > ul {
+            left: 0;
+        }
+
+        .sub-menu-item:hover > ul {
+            left: 0;
+        }
+    </style>
+    <ul class="navigation">
+        <li class="menu-item">
+            Item 1
+            <ul class="dropdown">
+                <li class="sub-menu-item">
+                    Item 1.1
+                    <ul>
+                        <li class="ter-menu-item">
+                            Item 1.1.1
+                            <ul>
                                 <li class="ter-menu-item">Item 1.1.1.1</li>
                                 <li class="ter-menu-item">Item 1.1.1.2</li>
                                 <li class="ter-menu-item">Item 1.1.1.3</li>
                                 <li class="ter-menu-item">Item 1.1.1.4</li>
                                 <li class="ter-menu-item">Item 1.1.1.5</li>
-					        </ul>
-						</li>
-						<li class="ter-menu-item">Item 1.1.2</li>
-						<li class="ter-menu-item">Item 1.1.3</li>
-					</ul>
-				</li>
-				<li class="sub-menu-item">
-				    Item 1.2
-				    <ul>
-						<li class="ter-menu-item">Item 1.2.1</li>
-						<li class="ter-menu-item">Item 1.2.2</li>
-						<li class="ter-menu-item">Item 1.2.3</li>
-						<li class="ter-menu-item">Item 1.2.4</li>
-						<li class="ter-menu-item">Item 1.2.5</li>
-						<li class="ter-menu-item">Item 1.2.6</li>
-					</ul>
-				</li>
-				<li class="sub-menu-item">
-				    Item 1.3
-				    <ul>
-						<li class="ter-menu-item">Item 1.3.1</li>
-						<li class="ter-menu-item">Item 1.3.2</li>
-						<li class="ter-menu-item">Item 1.3.3</li>
-						<li class="ter-menu-item">Item 1.3.4</li>
-					</ul>
-				</li>
-				<li class="sub-menu-item">
-				    Item 1.4
-				    <ul>
-						<li class="ter-menu-item">Item 1.4.1</li>
-						<li class="ter-menu-item">Item 1.4.2</li>
-					</ul>
-			    </li>
-			</ul>
-		</li>
-		<li class="menu-item">
-			Item 2
-			<ul class="dropdown">
-				<li class="sub-menu-item">
-					Item 2.1
-					<ul>
-						<li class="ter-menu-item">Item 2.1.1</li>
-						<li class="ter-menu-item">Item 2.1.2</li>
-						<li class="ter-menu-item">Item 2.1.3</li>
-						<li class="ter-menu-item">Item 2.1.4</li>
-						<li class="ter-menu-item">Item 2.1.5</li>
-						<li class="ter-menu-item">Item 2.1.6</li>
-					</ul>
-				</li>
-				<li class="sub-menu-item">
-				    Item 2.2
-				    <ul>
-						<li class="ter-menu-item">Item 2.2.1</li>
-						<li class="ter-menu-item">Item 2.2.2</li>
-						<li class="ter-menu-item">Item 2.2.3</li>
-					</ul>
-				</li>
-				<li class="sub-menu-item">
-				    Item 2.3
-				    <ul>
-						<li class="ter-menu-item">Item 2.3.1</li>
-						<li class="ter-menu-item">Item 2.3.2</li>
-						<li class="ter-menu-item">Item 2.3.3</li>
-						<li class="ter-menu-item">Item 2.3.4</li>
-						<li class="ter-menu-item">Item 2.3.5</li>
-					</ul>
-				</li>
-				<li class="sub-menu-item">
-				    Item 2.4
-				    <ul>
-						<li class="ter-menu-item">Item 2.4.1</li>
-						<li class="ter-menu-item">Item 2.4.2</li>
-					</ul>
-			    </li>
-			</ul>
-		</li>
-		<li class="menu-item">
-			Item 3
-			<ul>
-				<li class="sub-menu-item">Item 3.1</li>
-				<li class="sub-menu-item">Item 3.2</li>
-				<li class="sub-menu-item">Item 3.3</li>
-				<li class="sub-menu-item">Item 3.4</li>
-				<li class="sub-menu-item">Item 3.5</li>
-				<li class="sub-menu-item">Item 3.6</li>
-				<li class="sub-menu-item">Item 3.7</li>
-				<li class="sub-menu-item">Item 3.8</li>
-			</ul>
-		</li>
-	</ul>
+                            </ul>
+                        </li>
+                        <li class="ter-menu-item">Item 1.1.2</li>
+                        <li class="ter-menu-item">Item 1.1.3</li>
+                    </ul>
+                </li>
+                <li class="sub-menu-item">
+                    Item 1.2
+                    <ul>
+                        <li class="ter-menu-item">Item 1.2.1</li>
+                        <li class="ter-menu-item">Item 1.2.2</li>
+                        <li class="ter-menu-item">Item 1.2.3</li>
+                        <li class="ter-menu-item">Item 1.2.4</li>
+                        <li class="ter-menu-item">Item 1.2.5</li>
+                        <li class="ter-menu-item">Item 1.2.6</li>
+                    </ul>
+                </li>
+                <li class="sub-menu-item">
+                    Item 1.3
+                    <ul>
+                        <li class="ter-menu-item">Item 1.3.1</li>
+                        <li class="ter-menu-item">Item 1.3.2</li>
+                        <li class="ter-menu-item">Item 1.3.3</li>
+                        <li class="ter-menu-item">Item 1.3.4</li>
+                    </ul>
+                </li>
+                <li class="sub-menu-item">
+                    Item 1.4
+                    <ul>
+                        <li class="ter-menu-item">Item 1.4.1</li>
+                        <li class="ter-menu-item">Item 1.4.2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            Item 2
+            <ul class="dropdown">
+                <li class="sub-menu-item">
+                    Item 2.1
+                    <ul>
+                        <li class="ter-menu-item">Item 2.1.1</li>
+                        <li class="ter-menu-item">Item 2.1.2</li>
+                        <li class="ter-menu-item">Item 2.1.3</li>
+                        <li class="ter-menu-item">Item 2.1.4</li>
+                        <li class="ter-menu-item">Item 2.1.5</li>
+                        <li class="ter-menu-item">Item 2.1.6</li>
+                    </ul>
+                </li>
+                <li class="sub-menu-item">
+                    Item 2.2
+                    <ul>
+                        <li class="ter-menu-item">Item 2.2.1</li>
+                        <li class="ter-menu-item">Item 2.2.2</li>
+                        <li class="ter-menu-item">Item 2.2.3</li>
+                    </ul>
+                </li>
+                <li class="sub-menu-item">
+                    Item 2.3
+                    <ul>
+                        <li class="ter-menu-item">Item 2.3.1</li>
+                        <li class="ter-menu-item">Item 2.3.2</li>
+                        <li class="ter-menu-item">Item 2.3.3</li>
+                        <li class="ter-menu-item">Item 2.3.4</li>
+                        <li class="ter-menu-item">Item 2.3.5</li>
+                    </ul>
+                </li>
+                <li class="sub-menu-item">
+                    Item 2.4
+                    <ul>
+                        <li class="ter-menu-item">Item 2.4.1</li>
+                        <li class="ter-menu-item">Item 2.4.2</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li class="menu-item">
+            Item 3
+            <ul>
+                <li class="sub-menu-item">Item 3.1</li>
+                <li class="sub-menu-item">Item 3.2</li>
+                <li class="sub-menu-item">Item 3.3</li>
+                <li class="sub-menu-item">Item 3.4</li>
+                <li class="sub-menu-item">Item 3.5</li>
+                <li class="sub-menu-item">Item 3.6</li>
+                <li class="sub-menu-item">Item 3.7</li>
+                <li class="sub-menu-item">Item 3.8</li>
+            </ul>
+        </li>
+    </ul>
 </body>
 
 <script type="text/javascript" charset="utf-8">
     function runTest() {
         var menu = new DropMenu('.menu-item, .sub-menu-item, .ter-menu-item',{
-	        effects: {                  // NEW: all options within 'effects' can now be placed outside it
-	            show: [ Effect.Appear ],      // Can use a combination of effects to
-	            hide: [ Effect.Fade ],          // show or hide the dropdowns
-	            showDuration: 0.1,
-	            hideDuration: 0.1,
-	            transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
-	        },
-	        showDelay: 0.2,             // NEW: can be in either the 'effects' object or here (backwards compatible)
-	        hideDelay: 0.3,             // NEW: can be in either the 'effects' object or here (backwards compatible)
-	        
-	        rootItems: '.menu-item'     // NEW: Tell DropMenu which ones are the root items, and click enables them
-		});
+            effects: {                  // NEW: all options within 'effects' can now be placed outside it
+                show: [ Effect.Appear ],      // Can use a combination of effects to
+                hide: [ Effect.Fade ],          // show or hide the dropdowns
+                showDuration: 0.1,
+                hideDuration: 0.1,
+                transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
+            },
+            showDelay: 0.2,             // NEW: can be in either the 'effects' object or here (backwards compatible)
+            hideDelay: 0.3,             // NEW: can be in either the 'effects' object or here (backwards compatible)
+
+            rootItems: '.menu-item'     // NEW: Tell DropMenu which ones are the root items, and click enables them
+        });
     }
 
     Event.observe(window, "load", runTest);
