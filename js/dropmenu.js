@@ -109,7 +109,7 @@ var DropMenu = Class.create({
             // If visible, then hide straight away
             if (caller != null && (menuItem.element == caller.element || caller.element.ancestors().indexOf(menuItem.element) != -1)) {
             } else {
-                menuItem.hide();
+                menuItem.hide(0);
             }
         });
     },
@@ -217,7 +217,7 @@ var DropMenu = Class.create({
 
                             if (newMenuItem != null && newMenuItem.dropMenu != null) {
                                 // Hide the drop down
-                                newMenuItem.dropMenu.hide();
+                                newMenuItem.dropMenu.hide(0);
 
                                 onHoverOutPrevious = true;
                             }
@@ -450,7 +450,7 @@ DropMenu.Item = Class.create({
         this.hideDelayTimer = setTimeout(this.hide.bind(this), this.options.hideDelay * 1000);
     },
 
-    hide: function() {
+    hide: function(duration) {
         if (this.dropdown != null) {
             this.element.removeClassName(this.options.activeClass);
             
@@ -464,7 +464,7 @@ DropMenu.Item = Class.create({
             }.bind(this));
 
             this.currentEffect = new Effect.Parallel(effects, {
-                duration: this.options.effects.hideDuration,
+                duration: (duration == null ? this.options.effects.showDuration : duration),
                 afterFinish: function() {
                     this.accessibilityHide();
                 }.bind(this)
