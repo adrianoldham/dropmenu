@@ -149,14 +149,18 @@ DropMenu.Item = Class.create({
             this.anchor = this.element.getElementsBySelector('a').first();
             
             this.anchor.observe("click", this.toggleShow.bindAsEventListener(this));
-            this.anchor.observe('custom:mouseenter', this.rootShow.bind(this));
+            this.anchor.observe('custom:mouseenter', this.rootShow.bindAsEventListener(this));
             this.anchor.observe("blur", this.rootHide.bindAsEventListener(this));
         } else {
-            this.element.observe('custom:mouseenter', this.delayShow.bind(this));
+            this.element.observe('custom:mouseenter', this.delayShow.bindAsEventListener(this));
             
             if (this.options.osMode == false) {
                 // Handle delayed show and hides
                 this.element.observe('custom:mouseleave', this.delayHide.bind(this));   
+            } else {
+                this.element.observe('custom:mouseleave', function(event) {
+                    clearTimeout(this.showDelayTimer);
+                }.bindAsEventListener(this));
             }
         }
         
@@ -262,7 +266,10 @@ DropMenu.Item = Class.create({
         clearTimeout(this.hideDelayTimer);
     },
 
-    delayShow: function() {
+    delayShow: function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        
         // On show of a menu item, quickly hide any items that have a delayed hide
         this.parent.forceDelayedHides(this);
         
