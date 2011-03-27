@@ -84,13 +84,13 @@ var DropMenu = Class.create({
          
         // Add backwards compatibility in terms of effects options
         if (options.effects != null) {
-            effectOptions = Object.extend({ }, this.options, options.effects);
+            effectOptions = Object.extend(Object.extend({ }, this.options), options.effects);
         } else {
             effectOptions = Object.extend({ }, this.options);
         }
         
         this.options = Object.extend(effectOptions, options || { });
-
+        
         // Find the root items
         this.rootItems = $$(this.options.rootItems);
         
@@ -344,7 +344,7 @@ DropMenu.Item = Class.create({
         this.show(0);
     },
 
-    toggleShow: function() {
+    toggleShow: function(event) {
         // Toggle active state
         this.parent.rootActive = !this.parent.rootActive;
         
@@ -356,6 +356,7 @@ DropMenu.Item = Class.create({
         }
         
         event.preventDefault();
+        event.stopPropagation();
         
         return false;
     },
@@ -402,7 +403,7 @@ DropMenu.Item = Class.create({
         this.reset();
 
         // Restart delay timer
-        this.showDelayTimer = setTimeout(this.show.bind(this), this.options.showDelay * 1000);
+        this.showDelayTimer = setTimeout(function () { this.show(); }.bind(this), this.options.showDelay * 1000);
     },
 
     show: function(duration) {
@@ -426,9 +427,11 @@ DropMenu.Item = Class.create({
                 effects.push(effect(this.dropdown, { sync: true }));
             }.bind(this));
             
+            
+            console.log(arguments)
             // Perform the affect
             this.currentEffect = new Effect.Parallel(effects, {
-                duration: (duration == null ? this.options.effects.showDuration : duration),
+                duration: (duration == null ? this.options.showDuration : duration),
                 transition: this.options.effects.transition,
                 queue: { position: 'end', scope: 'dropmenu-show' },
                 afterSetup: function() {
@@ -447,7 +450,7 @@ DropMenu.Item = Class.create({
         this.reset();
 
         // Restart delay timer
-        this.hideDelayTimer = setTimeout(this.hide.bind(this), this.options.hideDelay * 1000);
+        this.hideDelayTimer = setTimeout(function() { this.hide(); }.bind(this), this.options.hideDelay * 1000);
     },
 
     hide: function(duration) {
@@ -464,7 +467,7 @@ DropMenu.Item = Class.create({
             }.bind(this));
 
             this.currentEffect = new Effect.Parallel(effects, {
-                duration: (duration == null ? this.options.effects.showDuration : duration),
+                duration: (duration == null ? this.options.showDuration : duration),
                 afterFinish: function() {
                     this.accessibilityHide();
                 }.bind(this)
