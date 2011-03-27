@@ -100,6 +100,8 @@ var DropMenu = Class.create({
         }.bind(this));
         
         $(document.body).observe('click', this.documentClick.bindAsEventListener(this));
+        
+        this.setupKeyboard();
     },
 
     forceDelayedHides: function(caller) {
@@ -126,6 +128,122 @@ var DropMenu = Class.create({
             this.forceDelayedHides();
             this.rootActive = false;
         }
+    },
+    
+    onHoverOutAll: function(caller) {
+        this.menuItems.each(function(menuItem) {
+            if (menuItem != caller) {
+                menuItem.onHoverOut();   
+            }
+        });
+    },
+    
+    setupKeyboard: function() {
+        $(document.body).observe('keydown', function(event) {
+            if (this.rootActive && this.lastActive != null) {
+                var newMenuItem, onHoverOutPrevious;
+                
+                var nextKey = 40, previousKey = 38, openKey = 39, closeKey = 37;
+                if (this.lastActive.isOsRoot()) {
+                    nextKey = 39;
+                    previousKey = 37;
+                    openKey = 40;
+                    closeKey = 38;
+                }
+                
+                switch (event.keyCode) {
+                    case 27: // escape key
+                        // hide all on escape
+                        this.forceDelayedHides();
+                        this.rootActive = false;
+                        return;
+                    case nextKey: // down
+                        newMenuItem = this.lastActive.element.next();
+                        
+                        // Loop if root
+                        if (newMenuItem == null && this.lastActive.isOsRoot()) {
+                            newMenuItem = this.lastActive.element.siblings().first();
+                        }
+                        
+                        onHoverOutPrevious = true;
+                        break;
+                    case previousKey: // up
+                        newMenuItem = this.lastActive.element.previous();
+                        
+                        // Loop if root
+                        if (newMenuItem == null && this.lastActive.isOsRoot()) {
+                            newMenuItem = this.lastActive.element.siblings().last();
+                        }
+                        
+                        onHoverOutPrevious = true;
+                        break;
+                    case openKey: // right
+                        var dropdown = this.lastActive.dropdown;
+                        if (dropdown != null) {
+                            this.forceDelayedHides(this.lastActive);
+                            this.lastActive.show(0);
+                            this.lastActive.element.addClassName(this.options.activeClass);
+                            
+                            newMenuItem = dropdown.getElementsBySelector('li').first();
+                        } else {
+                            // Next root item if nothing to open
+                            var activeRoot = this.lastActive.element.up(this.options.rootItems);
+                            if (activeRoot != null) {
+                                newMenuItem = activeRoot.next();
+                                
+                                // Loop the next active root
+                                if (newMenuItem == null) {
+                                    newMenuItem = activeRoot.siblings().first();
+                                }
+                            }
+                        }
+                        break;
+                    case closeKey: // left
+                        newMenuItem = this.lastActive.element.parentNode.parentNode;
+                        
+                        if (newMenuItem != null && newMenuItem.dropMenu != null) {
+                            // If new item is the root, then go previous instead
+                            if (newMenuItem.dropMenu.isOsRoot()) {
+                                var newNewMenuItem = newMenuItem.previous();
+                                if (newNewMenuItem != null) {
+                                    newMenuItem = newNewMenuItem;
+                                } else {
+                                    newMenuItem = newMenuItem.siblings().last();
+                                }
+                                
+                                onHoverOutPrevious = true;
+                                break;
+                            }
+
+                            if (newMenuItem != null && newMenuItem.dropMenu != null) {
+                                // Hide the drop down
+                                newMenuItem.dropMenu.hide();
+
+                                onHoverOutPrevious = true;
+                            }
+                        }
+                        
+                        break;
+                }
+                
+                if (newMenuItem != null && newMenuItem.dropMenu != null) {
+                    if (onHoverOutPrevious) {
+                        this.lastActive.onHoverOut();    
+                    }
+                    
+                    newMenuItem.dropMenu.onHover();
+                    
+                    if (newMenuItem.dropMenu.isOsRoot()) {
+                        newMenuItem.dropMenu.show(0);
+                    }
+                    
+                    event.stopPropagation();
+                    event.preventDefault();
+                    
+                    this.forceDelayedHides(this.lastActive);
+                }
+            }
+        }.bindAsEventListener(this));
     }
 });
 
@@ -137,6 +255,9 @@ DropMenu.Item = Class.create({
         
         this.element = $(element);
         this.parent = parent;
+        
+        // Store dropmenu into element
+        this.element.dropMenu = this;
         
         // Setup a dropdown if one exists
         this.setupDropdown();
@@ -202,10 +323,14 @@ DropMenu.Item = Class.create({
     },
     
     onHover: function() {
+        this.parent.onHoverOutAll(this);
+        this.parent.lastActive = this;
+        
         this.element.addClassName(this.options.hoverClass);
     },
     
     onHoverOut: function() {
+        this.parent.lastActive = null;
         this.element.removeClassName(this.options.hoverClass);
     },
     
@@ -289,6 +414,8 @@ DropMenu.Item = Class.create({
         
         // If dropdown exists
         if (this.dropdown != null) {
+            this.parent.lastActive = this;
+        
             // Cancel any previous effects to avoid double effect
             this.reset();
 
@@ -298,7 +425,7 @@ DropMenu.Item = Class.create({
             this.options.effects.show.each(function(effect) {
                 effects.push(effect(this.dropdown, { sync: true }));
             }.bind(this));
-
+            
             // Perform the affect
             this.currentEffect = new Effect.Parallel(effects, {
                 duration: (duration == null ? this.options.effects.showDuration : duration),
