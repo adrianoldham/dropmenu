@@ -427,8 +427,6 @@ DropMenu.Item = Class.create({
                 effects.push(effect(this.dropdown, { sync: true }));
             }.bind(this));
             
-            
-            console.log(arguments)
             // Perform the affect
             this.currentEffect = new Effect.Parallel(effects, {
                 duration: (duration == null ? this.options.showDuration : duration),
