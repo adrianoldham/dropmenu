@@ -104,12 +104,12 @@ var DropMenu = Class.create({
         this.setupKeyboard();
     },
 
-    forceDelayedHides: function(caller) {
+    forceDelayedHides: function(caller, duration) {
         this.menuItems.each(function(menuItem) {
             // If visible, then hide straight away
             if (caller != null && (menuItem.element == caller.element || caller.element.ancestors().indexOf(menuItem.element) != -1)) {
             } else {
-                menuItem.hide(0);
+                menuItem.hide(duration == null ? 0 : duration);
             }
         });
     },
@@ -125,7 +125,7 @@ var DropMenu = Class.create({
         });
         
         if (!ignore) {
-            this.forceDelayedHides();
+            this.forceDelayedHides(null, this.options.hideDuration);
             this.rootActive = false;
         }
     },
@@ -154,7 +154,7 @@ var DropMenu = Class.create({
                 switch (event.keyCode) {
                     case 27: // escape key
                         // hide all on escape
-                        this.forceDelayedHides();
+                        this.forceDelayedHides(null, this.options.hideDuration);
                         this.rootActive = false;
                         return;
                     case nextKey: // down
@@ -465,7 +465,7 @@ DropMenu.Item = Class.create({
             }.bind(this));
 
             this.currentEffect = new Effect.Parallel(effects, {
-                duration: (duration == null ? this.options.showDuration : duration),
+                duration: (duration == null ? this.options.hideDuration : duration),
                 afterFinish: function() {
                     this.accessibilityHide();
                 }.bind(this)
