@@ -10,148 +10,167 @@
     <script type="text/javascript" charset="utf-8" src="../lib/scriptaculous.js?load=effects"></script>
     <script type="text/javascript" charset="utf-8" src="../js/dropmenu.js"></script>
 </head>
+<style type="text/css" media="screen">
+    * {
+        padding: 0;
+        margin: 0;
+        outline: none;
+    }
 
+    html {
+        font-size: 100%;
+    }
+
+    body {
+        background-color: #111;
+        font: 0.75em "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
+        overflow: hidden;
+        text-shadow: rgba(255, 255, 255, 0.5) 0 0.1em 0;
+    }
+
+    .navigation {
+        background-color: rgba(255, 255, 255, 0.75);
+        background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(1, rgba(255, 255, 255, 0.5)),
+            color-stop(0.98, rgba(255, 255, 255, 0.5)),
+            color-stop(0.97, rgba(227, 225, 225, 0.5)),
+            color-stop(0.02, rgba(164, 162, 163, 0.5)),
+            color-stop(0.01, rgba(0, 0, 0, 0.5)),
+            color-stop(0, rgba(0, 0, 0, 0.5))
+        );
+        -webkit-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        font-size: 1.17em;
+        height: 1.75em;
+        width: 100%;
+    }
+
+    .navigation a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    .navigation .first-menu-item {
+        font-weight: bold;
+        margin-left: 0.75em;
+    }
+
+    .navigation .first-menu-item .sub-menu-item {
+        font-weight: normal;
+    }
+
+    .navigation .menu-item {
+        float: left;
+        line-height: 1.75em;
+    }
+
+    .navigation .menu-item a {
+        display: block;
+        padding: 0 0.75em;
+    }
+
+    .navigation .menu-item,
+    .navigation .sub-menu-item {
+        list-style-type: none;
+        color: #000;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .navigation .sub-menu-item {
+        padding: 2px 15px;
+        line-height: 20px;
+    }
+
+    .navigation ul {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.95);
+        -webkit-border-bottom-left-radius: 0.3em;
+        -webkit-border-bottom-right-radius: 0.3em;
+        -webkit-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
+        width: 20em;
+    }
+
+    .navigation ul ul {
+        -webkit-border-top-right-radius: 0.3em;
+    }
+
+    .navigation .menu-item ul {
+        top: 1.75em;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
+    }
+
+    .navigation .sub-menu-item ul {
+        top: -0.3em;
+        margin-left: 20em;
+        -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .navigation ul .hover,
+    ul .active {
+        background-color: rgb(54, 90, 238);
+        background-position: 0 0;
+        background-image: -webkit-gradient(
+            linear,
+            left bottom,
+            left top,
+            color-stop(1, rgb(123, 148, 244)),
+            color-stop(0.98, rgb(123, 148, 244)),
+            color-stop(0.97, rgb(106, 134, 244)),
+            color-stop(0.02, rgb(54, 90, 238)),
+            color-stop(0.01, rgb(39, 70, 210)),
+            color-stop(0, rgb(39, 70, 210))
+        );
+        text-shadow: none;
+    }
+
+    .navigation ul .hover a,
+    ul .active a {
+        color: #fff;
+    }
+
+    .navigation .menu-item li > a {
+        color: #000;
+    }
+
+    .navigation .menu-item li.hover > a, .navigation .menu-item li.active > a {
+        color: #fff;
+    }
+
+    .navigation .menu-item ul li.has-dropdown > a {
+        background: transparent url(images/arrow.png) no-repeat right 50%;
+        background-size: 1em;
+        display: block;
+    }
+
+    .navigation .menu-item ul li.hover.has-dropdown > a, .navigation .menu-item ul li.active.has-dropdown > a {
+        background-image: url(images/arrow-white.png);
+    }
+
+    .menu-item ul {
+        left: -99999px;
+    }
+
+    .menu-item: hover > ul {
+        left: 0;
+    }
+
+    .sub-menu-item: hover > ul {
+        left: 0;
+    }
+
+    .desktop-wallpaper {
+        display: block;
+    }
+</style>
 <body>
-    <style type="text/css" media="screen">
-        * {
-            padding: 0;
-            margin: 0;
-        }
+    <img class="desktop-wallpaper" src="images/img-wallpapers-mac-osx-leopard-wallpaper-apple-osx-7820.jpeg" width="100%" height="100%" />
 
-        body {
-            background-color:#fff;
-            font:12px "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
-        }
-        
-        .navigation {
-            background-image: -webkit-gradient(
-                linear,
-                left bottom,
-                left top,
-                color-stop(1, rgba(255,255,255,0.9)),
-                color-stop(0.98, rgba(255,255,255,0.9)),
-                color-stop(0.97, rgba(227,225,225,0.9)),
-                color-stop(0.02, rgba(164,162,163,0.9)),
-                color-stop(0.01, rgba(0,0,0,0.9)),
-                color-stop(0, rgba(0,0,0,0.9))
-            );
-            position:absolute;
-            top:0;
-            font-size:14px;
-            height:21px;
-            width:100%;
-        }
-        
-        .navigation a {
-            color:#000;
-            text-decoration:none;
-        }
-        
-        .navigation .first-menu-item {
-            font-weight:bold;
-            margin-left:10px;
-        }
-        
-        .navigation .first-menu-item .sub-menu-item {
-            font-weight:normal;
-        }
-        
-        .navigation .menu-item {
-            float:left;
-            line-height:21px;
-        }
-
-        .navigation .menu-item a {
-            display:block;
-            padding:0 10px;
-        }
-
-        .navigation .menu-item,
-        .navigation .sub-menu-item,
-        .navigation .ter-menu-item {
-            list-style-type: none;
-            color: #000;
-            cursor: pointer;
-            position: relative;
-        }
-
-        ul .sub-menu-item, ul .ter-menu-item {
-            padding:2px 15px 2px 20px;
-        }
-
-        .navigation ul {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.95);
-            -webkit-border-bottom-left-radius:4px 4px;
-            -webkit-border-bottom-right-radius:4px 4px;
-            -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-            width:256px;
-        }
-
-        .navigation .menu-item ul {
-            top:21px;
-            padding-bottom:4px;
-        }
-        
-        .navigation .sub-menu-item ul {
-            top:0;
-            margin-left:256px;
-            -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
-        }
-        
-        .navigation ul .hover,
-        ul .active {
-            background-position:0 0;
-            background-image: -webkit-gradient(
-                linear,
-                left bottom,
-                left top,
-                color-stop(1, rgb(123,148,244)),
-                color-stop(0.98, rgb(123,148,244)),
-                color-stop(0.97, rgb(106,134,244)),
-                color-stop(0.02, rgb(54,90,238)),
-                color-stop(0.01, rgb(39,70,210)),
-                color-stop(0, rgb(39,70,210))
-            );
-        }
-        
-        .navigation ul .hover a,
-        ul .active a {
-            color:#fff;
-        }
-        
-        .navigation .menu-item li > a {
-            color:#000;
-        }
-        
-        .navigation .menu-item li.hover > a, .navigation .menu-item li.active > a {
-            color:#fff;
-        }
-        
-        .navigation .menu-item ul li.has-dropdown > a {
-            background:transparent url(images/arrow.png) no-repeat right 5px;
-            display:block;
-        }
-
-        .menu-item ul {
-            left: -99999px;
-        }
-
-        .menu-item:hover > ul {
-            left: 0;
-        }
-
-        .sub-menu-item:hover > ul {
-            left: 0;
-        }
-        
-        .desktop-wallpaper {
-            display:block;
-        }
-    </style>
-    
-    <img class="desktop-wallpaper" src="images/img-wallpapers-mac-osx-leopard-wallpaper-apple-osx-7820.jpeg" width="100%" />
-    
     <ul class="navigation">
         <li class="first-menu-item menu-item">
             <a href="">Finder</a>
@@ -159,45 +178,54 @@
                 <li class="sub-menu-item">
                     <a href="">Item 1.1</a>
                     <ul>
-                        <li class="ter-menu-item">
+                        <li class="sub-menu-item">
                             <a href="">Item 1.1.1</a>
                             <ul>
-                                <li class="ter-menu-item"><a href="">Item 1.1.1.1</a></li>
-                                <li class="ter-menu-item"><a href="">Item 1.1.1.2</a></li>
-                                <li class="ter-menu-item"><a href="">Item 1.1.1.3</a></li>
-                                <li class="ter-menu-item"><a href="">Item 1.1.1.4</a></li>
-                                <li class="ter-menu-item"><a href="">Item 1.1.1.5</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.1.1</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.1.2</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.1.3</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.1.4</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.1.5</a></li>
                             </ul>
                         </li>
-                        <li class="ter-menu-item"><a href="">Item 1.1.2</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.1.3</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.1.2</a></li>
+                        <li class="sub-menu-item">
+                            <a href="">Item 1.1.3</a>
+                            <ul>
+                                <li class="sub-menu-item"><a href="">Item 1.1.3.1</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.3.2</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.3.3</a></li>
+                                <li class="sub-menu-item"><a href="">Item 1.1.3.4</a></li>
+                            </ul>
+
+                        </li>
                     </ul>
                 </li>
                 <li class="sub-menu-item">
                     <a href="">Item 1.2</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 1.2.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.2.2</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.2.3</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.2.4</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.2.5</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.2.6</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.2.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.2.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.2.3</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.2.4</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.2.5</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.2.6</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu-item">
                     <a href="">Item 1.3</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 1.3.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.3.2</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.3.3</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.3.4</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.3.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.3.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.3.3</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.3.4</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu-item">
                     <a href="">Item 1.4</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 1.4.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 1.4.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.4.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 1.4.2</a></li>
                     </ul>
                 </li>
             </ul>
@@ -208,37 +236,37 @@
                 <li class="sub-menu-item">
                     <a href="">Item 2.1</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 2.1.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.1.2</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.1.3</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.1.4</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.1.5</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.1.6</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.1.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.1.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.1.3</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.1.4</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.1.5</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.1.6</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu-item">
                     <a href="">Item 2.2</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 2.2.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.2.2</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.2.3</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.2.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.2.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.2.3</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu-item">
                     <a href="">Item 2.3</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 2.3.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.3.2</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.3.3</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.3.4</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.3.5</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.3.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.3.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.3.3</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.3.4</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.3.5</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu-item">
                     <a href="">Item 2.4</a>
                     <ul>
-                        <li class="ter-menu-item"><a href="">Item 2.4.1</a></li>
-                        <li class="ter-menu-item"><a href="">Item 2.4.2</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.4.1</a></li>
+                        <li class="sub-menu-item"><a href="">Item 2.4.2</a></li>
                     </ul>
                 </li>
             </ul>
@@ -261,18 +289,17 @@
 
 <script type="text/javascript" charset="utf-8">
     function runTest() {
-        var menu = new DropMenu('.menu-item, .sub-menu-item, .ter-menu-item',{
+        var menu = new DropMenu('.navigation li', {
             effects: {                  // NEW: all options within 'effects' can now be placed outside it
                 show: [ Effect.Appear ],      // Can use a combination of effects to
-                hide: [ Effect.Fade ],          // show or hide the dropdowns
-                showDuration: 0.2,
-                hideDuration: 0.2,
+                hide: [ Effect.Fade ],        // show or hide the dropdowns
+                showDuration: 0.1,
+                hideDuration: 0.5,
                 transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
             },
-            showDelay: 0.3,             // NEW: can be in either the 'effects' object or here (backwards compatible)
-            hideDelay: 0.3,             // NEW: can be in either the 'effects' object or here (backwards compatible)
-
-            osMode: true,     
+            showDelay: 0.2,             // NEW: can be in either the 'effects' object or here (backwards compatible)
+            hideDelay: 0.5,             // NEW: can be in either the 'effects' object or here (backwards compatible)
+            osMode: true,
             rootItems: '.menu-item'     // NEW: Tell DropMenu which ones are the root items, and click enables them
         });
     }
