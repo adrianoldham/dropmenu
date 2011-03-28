@@ -294,11 +294,13 @@ DropMenu.Item = Class.create({
         var dropdown = this.element.getElementsBySelector(this.options.dropdownElement)[0];
 
         if (dropdown !== undefined) {
+            this.element.addClassName(this.options.hasDropdownClass);
+        
             // If using any sort of sliding effect, we need to add a wrapper around the dropdown
-            if (this.options.effects.show.indexOf(Effect.SlideUp)   != -1 ||
-                this.options.effects.show.indexOf(Effect.SlideDown) != -1 ||
-                this.options.effects.hide.indexOf(Effect.SlideUp)   != -1 ||
-                this.options.effects.hide.indexOf(Effect.SlideDown) != -1) {
+            if (this.options.show.indexOf(Effect.SlideUp)   != -1 ||
+                this.options.show.indexOf(Effect.SlideDown) != -1 ||
+                this.options.hide.indexOf(Effect.SlideUp)   != -1 ||
+                this.options.hide.indexOf(Effect.SlideDown) != -1) {
                 
                 this.dropdown = dropdown.wrap("div");
             } else {
@@ -309,12 +311,15 @@ DropMenu.Item = Class.create({
             this.hideDisplay = this.dropdown.getStyle('display');
 
             if (this.options.showLeft == null) {
-                this.showLeft = this.dropdown.getStyle('width');
+                if (this.element.parentNode != null && this.element.parentNode.parentNode != null & this.element.parentNode.parentNode.dropMenu != null) {
+                    console.log(this.element.parentNode.parentNode.dropMenu.dropdown)
+                    this.showLeft = this.element.parentNode.parentNode.dropMenu.dropdown.offsetWidth + "px";
+                } else {
+                    this.showLeft = 0;
+                }
             } else {
                 this.showLeft = this.options.showLeft;
             }
-            
-            this.element.addClassName(this.options.hasDropdownClass);
         }
     },
     
@@ -423,14 +428,14 @@ DropMenu.Item = Class.create({
             var effects = [];
             
             // Loop through all effects in options and create them
-            this.options.effects.show.each(function(effect) {
+            this.options.show.each(function(effect) {
                 effects.push(effect(this.dropdown, { sync: true }));
             }.bind(this));
             
             // Perform the affect
             this.currentEffect = new Effect.Parallel(effects, {
                 duration: (duration == null ? this.options.showDuration : duration),
-                transition: this.options.effects.transition,
+                transition: this.options.transition,
                 queue: { position: 'end', scope: 'dropmenu-show' },
                 afterSetup: function() {
                     // Afters setup of effect, make sure it's visible then show affect
@@ -460,7 +465,7 @@ DropMenu.Item = Class.create({
 
             var effects = [];
 
-            this.options.effects.hide.each(function(effect) {
+            this.options.hide.each(function(effect) {
                 effects.push(effect(this.dropdown, { sync: true }));
             }.bind(this));
 

@@ -92,7 +92,9 @@
         -webkit-border-bottom-left-radius: 0.3em;
         -webkit-border-bottom-right-radius: 0.3em;
         -webkit-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
-        width: 20em;
+        /*width: 20em;*/
+        min-width: 10em;
+        white-space: nowrap;
     }
 
     .navigation ul ul {
@@ -107,7 +109,8 @@
 
     .navigation .sub-menu-item ul {
         top: -0.3em;
-        margin-left: 20em;
+        /*margin-left: 20em;*/
+        margin:0;
         -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
     }
 
@@ -146,6 +149,7 @@
         background: transparent url(images/arrow.png) no-repeat right 50%;
         background-size: 1em;
         display: block;
+        padding-right: 30px;
     }
 
     .navigation .menu-item ul li.hover.has-dropdown > a, .navigation .menu-item ul li.active.has-dropdown > a {
@@ -153,7 +157,7 @@
     }
 
     .menu-item ul {
-        left: -99999px;
+        left: -99999em;
     }
 
     .menu-item: hover > ul {
@@ -179,7 +183,7 @@
                     <a href="">Item 1.1</a>
                     <ul>
                         <li class="sub-menu-item">
-                            <a href="">Item 1.1.1</a>
+                            <a href="">Item 1.1.1 - Long item</a>
                             <ul>
                                 <li class="sub-menu-item"><a href="">Item 1.1.1.1</a></li>
                                 <li class="sub-menu-item"><a href="">Item 1.1.1.2</a></li>
@@ -297,6 +301,7 @@
                 hideDuration: 0.5,
                 transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
             },
+            showLeft:null,
             showDelay: 0.2,             // NEW: can be in either the 'effects' object or here (backwards compatible)
             hideDelay: 0.5,             // NEW: can be in either the 'effects' object or here (backwards compatible)
             osMode: true,
