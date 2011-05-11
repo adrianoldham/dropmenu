@@ -65,7 +65,7 @@ var DropMenu = Class.create({
 
         activeClass: "active",                          // The class applied when a dropdown is visible
         hoverClass: "hover",                            // The class applied to a menu when it's hovered over
-        hasDropdownClass: "has-dropdown",               // The class applied to a menu if it has a dropdown
+        hasDropdownClass: "parent",               // The class applied to a menu if it has a dropdown
         
         dropdownElement: "ul",                          // The element type of the dropdowns to look for
         showLeft: 0,                                    // Set null to use parent element width, non-zero values require units ie: "200px" or "20em"
