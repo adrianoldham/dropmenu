@@ -25,23 +25,61 @@
         background-color: #111;
         font: 0.75em "Lucida Grande", "Trebuchet MS", Verdana, sans-serif;
         overflow: hidden;
-        text-shadow: rgba(255, 255, 255, 0.5) 0 0.1em 0;
+        text-shadow: rgba(255, 255, 255, 0.5) 0 0.084em 0;
     }
 
     .navigation {
         background-color: rgba(255, 255, 255, 0.75);
         background-image: -webkit-gradient(
             linear,
-            left bottom,
             left top,
-            color-stop(1, rgba(255, 255, 255, 0.5)),
-            color-stop(0.98, rgba(255, 255, 255, 0.5)),
-            color-stop(0.97, rgba(227, 225, 225, 0.5)),
-            color-stop(0.02, rgba(164, 162, 163, 0.5)),
-            color-stop(0.01, rgba(0, 0, 0, 0.5)),
-            color-stop(0, rgba(0, 0, 0, 0.5))
+            left bottom,
+            color-stop(0, rgba(255, 255, 255, 0.5)),
+            color-stop(2%, rgba(255, 255, 255, 0.5)),
+            color-stop(3%, rgba(227, 225, 225, 0.5)),
+            color-stop(98%, rgba(164, 162, 163, 0.5)),
+            color-stop(99%, rgba(0, 0, 0, 0.5)),
+            color-stop(100%, rgba(0, 0, 0, 0.5))
+        );
+        background-image: -webkit-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0.5) 0,
+            rgba(255, 255, 255, 0.5) 2%,
+            rgba(227, 225, 225, 0.5) 3%,
+            rgba(164, 162, 163, 0.5) 98%,
+            rgba(0, 0, 0, 0.5) 99%,
+            rgba(0, 0, 0, 0.5) 100%
+        );
+        background-image: -moz-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0.5) 0,
+            rgba(255, 255, 255, 0.5) 2%,
+            rgba(227, 225, 225, 0.5) 3%,
+            rgba(164, 162, 163, 0.5) 98%,
+            rgba(0, 0, 0, 0.5) 99%,
+            rgba(0, 0, 0, 0.5) 100%
+        );
+        background-image: -o-linear-gradient(
+            top,
+            rgba(255, 255, 255, 0.5) 0,
+            rgba(255, 255, 255, 0.5) 2%,
+            rgba(227, 225, 225, 0.5) 3%,
+            rgba(164, 162, 163, 0.5) 98%,
+            rgba(0, 0, 0, 0.5) 99%,
+            rgba(0, 0, 0, 0.5) 100%
+        );
+        background-image: linear-gradient(
+            top,
+            rgba(255, 255, 255, 0.5) 0,
+            rgba(255, 255, 255, 0.5) 2%,
+            rgba(227, 225, 225, 0.5) 3%,
+            rgba(164, 162, 163, 0.5) 98%,
+            rgba(0, 0, 0, 0.5) 99%,
+            rgba(0, 0, 0, 0.5) 100%
         );
         -webkit-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
+        -moz-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
         position: fixed;
         top: 0;
         font-size: 1.17em;
@@ -52,25 +90,21 @@
     .navigation a {
         color: #000;
         text-decoration: none;
+        display: block;
+        padding: 0 0.75em;
     }
 
-    .navigation .first-menu-item {
-        font-weight: bold;
+    .navigation > .menu-item:first-child {
         margin-left: 0.75em;
     }
 
-    .navigation .first-menu-item .sub-menu-item {
-        font-weight: normal;
+    .navigation > .menu-item:first-child > a {
+        font-weight: bold;
     }
 
     .navigation .menu-item {
         float: left;
-        line-height: 1.75em;
-    }
-
-    .navigation .menu-item a {
-        display: block;
-        padding: 0 0.75em;
+        line-height: 1.75;
     }
 
     .navigation .menu-item,
@@ -79,11 +113,11 @@
         color: #000;
         cursor: pointer;
         position: relative;
+        white-space: nowrap;
     }
 
     .navigation .sub-menu-item {
-        padding: 2px 15px;
-        line-height: 20px;
+        padding: 0 0.75em 0 1em;
     }
 
     .navigation ul {
@@ -91,14 +125,17 @@
         background-color: rgba(255, 255, 255, 0.95);
         -webkit-border-bottom-left-radius: 0.3em;
         -webkit-border-bottom-right-radius: 0.3em;
+        border-bottom-left-radius: 0.3em;
+        border-bottom-right-radius: 0.3em;
         -webkit-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
-        /*width: 20em;*/
-        min-width: 10em;
-        white-space: nowrap;
+        -moz-box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
+        box-shadow: 0 0.4em 1.75em rgba(0, 0, 0, 0.5);
+        min-width: 20em;
     }
 
     .navigation ul ul {
         -webkit-border-top-right-radius: 0.3em;
+        border-top-right-radius: 0.3em;
     }
 
     .navigation .menu-item ul {
@@ -109,9 +146,8 @@
 
     .navigation .sub-menu-item ul {
         top: -0.3em;
-        /*margin-left: 20em;*/
-        margin:0;
-        -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+        margin-left: 20em;
+        /*margin-left: 0; set margin left zero when using show left null */
     }
 
     .navigation ul .hover,
@@ -120,14 +156,50 @@
         background-position: 0 0;
         background-image: -webkit-gradient(
             linear,
-            left bottom,
             left top,
-            color-stop(1, rgb(123, 148, 244)),
-            color-stop(0.98, rgb(123, 148, 244)),
-            color-stop(0.97, rgb(106, 134, 244)),
-            color-stop(0.02, rgb(54, 90, 238)),
-            color-stop(0.01, rgb(39, 70, 210)),
-            color-stop(0, rgb(39, 70, 210))
+            left bottom,
+            color-stop(0, rgb(123, 148, 244)),
+            color-stop(2%, rgb(123, 148, 244)),
+            color-stop(3%, rgb(106, 134, 244)),
+            color-stop(98%, rgb(54, 90, 238)),
+            color-stop(99%, rgb(39, 70, 210)),
+            color-stop(100%, rgb(39, 70, 210))
+        );
+        background-image: -webkit-linear-gradient(
+            top,
+            rgb(123, 148, 244) 0,
+            rgb(123, 148, 244) 2%,
+            rgb(106, 134, 244) 3%,
+            rgb(54, 90, 238) 98%,
+            rgb(39, 70, 210) 99%,
+            rgb(39, 70, 210) 100%
+        );
+        background-image: -moz-linear-gradient(
+            top,
+            rgb(123, 148, 244) 0,
+            rgb(123, 148, 244) 2%,
+            rgb(106, 134, 244) 3%,
+            rgb(54, 90, 238) 98%,
+            rgb(39, 70, 210) 99%,
+            rgb(39, 70, 210) 100%
+        );
+        background-image: -o-linear-gradient(
+            top,
+            rgb(123, 148, 244) 0,
+            rgb(123, 148, 244) 2%,
+            rgb(106, 134, 244) 3%,
+            rgb(54, 90, 238) 98%,
+            rgb(39, 70, 210) 99%,
+            rgb(39, 70, 210) 100%
+        );
+        background-image: linear-gradient(
+            top,
+            rgb(123, 148, 244) 0,
+            rgb(123, 148, 244) 2%,
+            rgb(106, 134, 244) 3%,
+            rgb(54, 90, 238) 98%,
+            rgb(39, 70, 210) 99%,
+            rgb(39, 70, 210) 100%
         );
         text-shadow: none;
     }
@@ -145,26 +217,27 @@
         color: #fff;
     }
 
-    .navigation .menu-item ul li.has-dropdown > a {
+    .navigation .menu-item ul li.parent > a {
         background: transparent url(images/arrow.png) no-repeat right 50%;
+        -webkit-background-size: 1em;
+        -moz-background-size: 1em;
         background-size: 1em;
         display: block;
-        padding-right: 30px;
     }
 
-    .navigation .menu-item ul li.hover.has-dropdown > a, .navigation .menu-item ul li.active.has-dropdown > a {
+    .navigation .menu-item ul li.hover.parent > a, .navigation .menu-item ul li.active.parent > a {
         background-image: url(images/arrow-white.png);
     }
 
     .menu-item ul {
-        left: -99999em;
+        left: -99999px;
     }
 
-    .menu-item: hover > ul {
+    .menu-item:hover > ul {
         left: 0;
     }
 
-    .sub-menu-item: hover > ul {
+    .sub-menu-item:hover > ul {
         left: 0;
     }
 
@@ -176,14 +249,14 @@
     <img class="desktop-wallpaper" src="images/img-wallpapers-mac-osx-leopard-wallpaper-apple-osx-7820.jpeg" width="100%" height="100%" />
 
     <ul class="navigation">
-        <li class="first-menu-item menu-item">
+        <li class="menu-item">
             <a href="">Finder</a>
-            <ul class="dropdown">
+            <ul>
                 <li class="sub-menu-item">
                     <a href="">Item 1.1</a>
                     <ul>
                         <li class="sub-menu-item">
-                            <a href="">Item 1.1.1 - Long item</a>
+                            <a href="">Item 1.1.1</a>
                             <ul>
                                 <li class="sub-menu-item"><a href="">Item 1.1.1.1</a></li>
                                 <li class="sub-menu-item"><a href="">Item 1.1.1.2</a></li>
@@ -236,7 +309,7 @@
         </li>
         <li class="menu-item">
             <a href="">File</a>
-            <ul class="dropdown">
+            <ul>
                 <li class="sub-menu-item">
                     <a href="">Item 2.1</a>
                     <ul>
@@ -294,6 +367,7 @@
 <script type="text/javascript" charset="utf-8">
     function runTest() {
         var menu = new DropMenu('.navigation li', {
+            //showLeft: null,           // Use 'null' to set left placement to parent menu width
             effects: {                  // NEW: all options within 'effects' can now be placed outside it
                 show: [ Effect.Appear ],      // Can use a combination of effects to
                 hide: [ Effect.Fade ],        // show or hide the dropdowns
@@ -301,7 +375,6 @@
                 hideDuration: 0.5,
                 transition: Effect.Transitions.linear           // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
             },
-            showLeft:null,
             showDelay: 0.2,             // NEW: can be in either the 'effects' object or here (backwards compatible)
             hideDelay: 0.5,             // NEW: can be in either the 'effects' object or here (backwards compatible)
             osMode: true,
