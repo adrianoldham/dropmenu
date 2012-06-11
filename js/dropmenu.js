@@ -82,6 +82,9 @@ var DropMenu = Class.create({
         // Set null to use parent element width, non-zero values require units ie: "200px" or "20em"
         showLeft: 0,
 
+        // Element selectors to exclude from keyboard navigation        
+        excludeElements: ".divider, .disabled",
+
         // Can use a combination of effects to show or hide the dropdowns
         show: [Effect.Appear],
         hide: [Effect.Fade],
@@ -90,7 +93,7 @@ var DropMenu = Class.create({
         showDuration: 0.2,
         hideDuration: 0.2,
 
-        // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for others
+        // Use spring to make it bouncy, or check http://wiki.github.com/madrobby/scriptaculous/effect-transitions for other transitions
         transition: Effect.Transitions.linear
     },
 
@@ -177,7 +180,7 @@ var DropMenu = Class.create({
                     return;
                 case nextKey:
                     // down
-                    newMenuItem = this.lastActive.element.next();
+                    newMenuItem = this.lastActive.element.next(':not(' + this.options.excludeElements + ')');
 
                     // Loop if root
                     if (newMenuItem == null && this.lastActive.isOsRoot()) {
@@ -188,7 +191,7 @@ var DropMenu = Class.create({
                     break;
                 case previousKey:
                     // up
-                    newMenuItem = this.lastActive.element.previous();
+                    newMenuItem = this.lastActive.element.previous(':not(' + this.options.excludeElements + ')');
 
                     // Loop if root
                     if (newMenuItem == null && this.lastActive.isOsRoot()) {
