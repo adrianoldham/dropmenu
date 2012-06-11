@@ -163,12 +163,14 @@ var DropMenu = Class.create({
                 var nextKey = 40,
                     previousKey = 38,
                     openKey = 39,
-                    closeKey = 37;
+                    closeKey = 37,
+                    goKey = 13;
                 if (this.lastActive.isOsRoot()) {
                     nextKey = 39;
                     previousKey = 37;
                     openKey = 40;
                     closeKey = 38;
+                    goKey = 13;
                 }
 
                 switch (event.keyCode) {
@@ -247,7 +249,14 @@ var DropMenu = Class.create({
                             onHoverOutPrevious = true;
                         }
                     }
-
+                    break;
+                case goKey:
+                    newMenuItem = this.lastActive.element;
+                    var href = newMenuItem.down("a").getAttribute("href");
+                    var location = window.location.href;
+                    if (href != location && href != "#") {
+                        window.location.href = href;
+                    }
                     break;
                 }
 
